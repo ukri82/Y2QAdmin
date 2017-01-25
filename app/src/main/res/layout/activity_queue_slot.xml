@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/activity_queue_slot"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.y2.y2qadmin.QueueSlotActivity">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:gravity="center"
+                  android:id="@+id/header_section">
+    <TextView android:id="@+id/queue_name"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textSize="24sp"/>
+
+    <TextView android:id="@+id/start_time"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textSize="24sp"/>
+
+        <TextView android:id="@+id/end_time"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="24sp"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                    android:orientation="vertical"
+                  android:gravity="center"
+                    android:layout_below="@+id/header_section">
+
+
+
+    <LinearLayout android:id="@+id/first_bar"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@+id/queue_name"
+                  android:orientation="horizontal"
+                  android:gravity="center">
+
+
+        <ImageButton android:id="@+id/start"
+                android:layout_width="@dimen/queue_slot_icon_size"
+                android:layout_height="@dimen/queue_slot_icon_size"
+                android:background="@drawable/ripple"
+                android:src="@drawable/play"/>
+
+        <ImageButton android:id="@+id/pause"
+                android:layout_width="@dimen/queue_slot_icon_size"
+                android:layout_height="@dimen/queue_slot_icon_size"
+                     android:background="@drawable/ripple"
+                android:src="@drawable/pause"/>
+
+        <ImageButton android:id="@+id/stop"
+                android:layout_width="@dimen/queue_slot_icon_size"
+                android:layout_height="@dimen/queue_slot_icon_size"
+                     android:background="@drawable/ripple"
+                android:src="@drawable/stop"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@+id/first_bar"
+                  android:orientation="horizontal"
+                  android:gravity="center">
+
+        <ImageButton android:id="@+id/prev"
+                android:layout_width="@dimen/queue_slot_icon_size"
+                android:layout_height="@dimen/queue_slot_icon_size"
+                     android:background="@drawable/ripple"
+                android:src="@drawable/rew"/>
+
+        <EditText android:id="@+id/token_number" android:layout_width="@dimen/queue_slot_icon_size"
+                  android:layout_height="wrap_content"
+                  android:textSize="48sp"
+                  android:inputType="number"
+                  android:text="1"
+                  android:background="@drawable/edit_text_background"/>
+
+        <ImageButton android:id="@+id/next"
+                android:layout_width="@dimen/queue_slot_icon_size"
+                android:layout_height="@dimen/queue_slot_icon_size"
+                     android:background="@drawable/ripple"
+                android:src="@drawable/ff"/>
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    android:id="@+id/org_card"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
+    android:layout_gravity="center"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/primary_light">
+
+        <TextView android:id="@+id/title"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_alignParentTop="true"
+                  android:padding="5dp"
+                  android:text="Organization"
+                  android:textColor="@color/primary_text"
+                  android:textSize="16sp"
+                  android:textStyle="bold"/>
+
+        <TextView android:id="@+id/start_time"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_below="@+id/title"
+                  android:padding="5dp"
+                  android:layout_marginRight="85dp"
+                  android:text="Q"
+                  android:inputType="textMultiLine"
+                  android:textSize="10sp"
+                  android:textColor="@color/primary_text"/>
+
+        <TextView android:id="@+id/end_time"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_below="@+id/start_time"
+                  android:padding="5dp"
+                  android:layout_marginRight="85dp"
+                  android:text="Q"
+                  android:inputType="textMultiLine"
+                  android:textSize="10sp"
+                  android:textColor="@color/primary_text"/>
+
+        <ImageView android:id="@+id/picture"
+                   android:layout_width="80dp"
+                   android:layout_height="match_parent"
+                   android:layout_alignParentTop="true"
+                   android:layout_alignParentRight="true"/>
+
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
