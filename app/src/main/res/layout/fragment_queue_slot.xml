@@ -12,12 +12,23 @@
     tools:context="com.y2.y2qadmin.QueueSlotListActivityFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/queue_card"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_margin="-5dp"
+    ></include>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/queue_slot_list_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/list_background"/>
+    </LinearLayout>
 
 
     <android.support.design.widget.FloatingActionButton
@@ -26,7 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:layout_width="wrap_content"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
+        android:background="@drawable/ripple"
+        app:srcCompat="@drawable/ic_add_black_48dp"/>
 
 
 </FrameLayout>

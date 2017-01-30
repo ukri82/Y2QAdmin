@@ -19,5 +19,11 @@ public class QueueSlot implements Serializable
 
     public Date mStartTime;
     public Date mEndTime;
+    public Date mCreationTime;
+    public Date mPauseTime;
+    public Date mCurrentTokenTime;
     public int mCurrentTokenNumber;
+    public int mExpectedTokens;
+
+    public static String QUEUE_SLOT_OBJ = "QueueSlot";
 }

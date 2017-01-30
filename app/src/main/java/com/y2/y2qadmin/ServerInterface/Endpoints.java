@@ -1,6 +1,8 @@
 package com.y2.y2qadmin.ServerInterface;
 
 
+import java.util.Date;
+
 /**
  * Created by Windows on 02-03-2015.
  */
@@ -24,6 +26,14 @@ public class Endpoints
         return aQueryString;
     }
 
+    public static String getRequestUrlNextQueueChunk(int aStart_in, int limit, String orgId)
+    {
+        //get_queues
+        String aQueryString = "http://" + myServerIp + "/y2q/default/get_queues" + "?Start=" + aStart_in + "&Count=" + limit + "&OrgId=" + orgId;
+
+        return aQueryString;
+    }
+
     public static String getRequestUrlNextQueueSlotChunk(int aStart_in, int limit, String qId)
     {
         //get_token_slots
@@ -32,18 +42,19 @@ public class Endpoints
         return aQueryString;
     }
 
-    public static String getRequestUrlCreateQueueSlot(String qId)
+    public static String getRequestUrlCreateQueueSlot(String qId, int expectedTokens, String creattionTime)
     {
-        //get_token_slots
-        String aQueryString = "http://" + myServerIp + "/y2q/default/create_queue_slot" + "?QueueId=" + qId;
+        //create_queue_slot
+        String aQueryString = "http://" + myServerIp + "/y2q/default/create_queue_slot" + "?QueueId=" + qId + "&ExpectedTokens=" + expectedTokens + "&CreationTime=" + creattionTime;
 
         return aQueryString;
     }
 
-    public static String getRequestUrlUpdateQueueSlot(String qSlotId, String updateStatus, int tokenNumber)
+    public static String getRequestUrlUpdateQueueSlot(String qSlotId, String updateStatus, int tokenNumber, String activityTime)
     {
-        //get_token_slots
-        String aQueryString = "http://" + myServerIp + "/y2q/default/update_queue_slot" + "?QueueSlotId=" + qSlotId + "&Status=" + updateStatus  + "&TokenNumber=" + tokenNumber;
+        //update_queue_slot
+        String aQueryString = "http://" + myServerIp + "/y2q/default/update_queue_slot" + "?QueueSlotId=" +
+                qSlotId + "&Status=" + updateStatus  + "&TokenNumber=" + tokenNumber  + "&Time=" + activityTime;
 
         return aQueryString;
     }

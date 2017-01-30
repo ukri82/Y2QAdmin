@@ -17,6 +17,9 @@ import com.y2.y2qadmin.model.QueueSlot;
 import com.y2.y2qadmin.model.Utils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -39,13 +42,23 @@ public class QueueSlotListAdapter extends RecyclerView.Adapter<QueueSlotListAdap
     private ImageLoader myImageLoader;
     private int myPreviousPosition = 0;
     Activity mActivity;
+    RecyclerView mParentView;
 
-    public QueueSlotListAdapter(Activity activity, QueueSlotClickListener listener)
+    public QueueSlotListAdapter(Activity activity, QueueSlotClickListener listener, RecyclerView parentView)
     {
         mActivity = activity;
+        mParentView = parentView;
         myVolleySingleton = VolleySingleton.getInstance(null);
         myImageLoader = myVolleySingleton.getImageLoader();
         mListener = listener;
+    }
+
+    public class QueueSlotComparator implements Comparator<QueueSlot>
+    {
+        public int compare(QueueSlot left, QueueSlot right)
+        {
+            return right.mCreationTime.compareTo(left.mCreationTime);
+        }
     }
 
     public void appendTokenSlotList(List<QueueSlot> data)
@@ -53,19 +66,29 @@ public class QueueSlotListAdapter extends RecyclerView.Adapter<QueueSlotListAdap
         int aNumItems = mDataset.size();
         mDataset.addAll(data);
 
+        Collections.sort(mDataset, new QueueSlotComparator());
+
         notifyItemRangeInserted(aNumItems, data.size());
     }
 
-    public void add(ArrayList<QueueSlot> dataset)
+    public ImageLoader getImageLoader()
     {
-        mDataset = dataset;
+        return myImageLoader;
     }
-
     @Override
     public void onQueueSlotCreated(QueueSlot queueSlot)
     {
         mDataset.add(0, queueSlot);
         notifyItemRangeInserted(0, 1);
+        mParentView.smoothScrollToPosition(0);
+
+    }
+
+    public void clear()
+    {
+        int size = mDataset.size();
+        mDataset.clear();
+        notifyItemRangeRemoved(0, size);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder
@@ -80,10 +103,10 @@ public class QueueSlotListAdapter extends RecyclerView.Adapter<QueueSlotListAdap
         {
             super(v);
             mParentView = v;
-            mTextView = (TextView)v.findViewById(R.id.title);
+            //mTextView = (TextView)v.findViewById(R.id.queue_name);
             mStartTimeView = (TextView)v.findViewById(R.id.start_time);
             mEndTimeView = (TextView)v.findViewById(R.id.end_time);
-            mPictureView = (ImageView)v.findViewById(R.id.picture);
+            mPictureView = (ImageView)v.findViewById(R.id.queue_picture);
         }
     }
 
@@ -143,11 +166,22 @@ public class QueueSlotListAdapter extends RecyclerView.Adapter<QueueSlotListAdap
             }
         });
 
-        Utils.updateBgColor(mActivity, holder.mParentView, mDataset.get(position).mQState);
+        //Utils.updateBgColor(mActivity, holder.mParentView, mDataset.get(position).mQState);
+        //Utils.updateBgColor(mActivity, holder.mParentView.findViewById(R.id.card_background), mDataset.get(position).mQState);
+        Utils.setQueueStatusIcon(holder.mPictureView, mDataset.get(position).mQState);
 
-        holder.mTextView.setText(mDataset.get(position).mQName);
-        holder.mStartTimeView.setText(mDataset.get(position).mStartTime + "");
-        holder.mEndTimeView.setText(mDataset.get(position).mEndTime + "");
+        //holder.mTextView.setText(mDataset.get(position).mQName);
+        String startDate = "Start : ";
+        if(mDataset.get(position).mStartTime != null)
+            startDate += Utils.printDateToScreen(mDataset.get(position).mStartTime);
+        holder.mStartTimeView.setText(startDate);
+
+        String endDate = "End : ";
+        if(mDataset.get(position).mEndTime != null)
+            endDate += Utils.printDateToScreen(mDataset.get(position).mEndTime);
+        holder.mEndTimeView.setText(endDate);
+
+
 
         //setOrgImage(mDataset.get(position), holder.mPictureView);
 
@@ -173,8 +207,8 @@ public class QueueSlotListAdapter extends RecyclerView.Adapter<QueueSlotListAdap
         return mDataset.size();
     }
 
-    public void create()
+    public void create(String qId)
     {
-        new TaskCreateQueueSlot(this, "1").execute();
+        new TaskCreateQueueSlot(this, qId, 100, Calendar.getInstance().getTime()).execute();
     }
 }

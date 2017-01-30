@@ -63,6 +63,9 @@ public class QueueSlotResultParser
                 qSlot.mQState = Utils.get(currentQSlotItem, "m_state");
                 qSlot.mStartTime = Utils.parseDate(Utils.get(currentQSlotItem, "m_start_time"));
                 qSlot.mEndTime = Utils.parseDate(Utils.get(currentQSlotItem, "m_end_time"));
+                qSlot.mCreationTime = Utils.parseDate(Utils.get(currentQSlotItem, "m_creation_time"));
+                qSlot.mPauseTime = Utils.parseDate(Utils.get(currentQSlotItem, "m_pause_time"));
+                qSlot.mCurrentTokenTime = Utils.parseDate(Utils.get(currentQSlotItem, "m_current_token_time"));
                 String imgURL = Utils.get(currentQItem, "m_photo_url");
                 qSlot.mPhotoURL = "";
                 if (!imgURL.isEmpty())
@@ -76,6 +79,13 @@ public class QueueSlotResultParser
                     tokenNum = "0";
                 }
                 qSlot.mCurrentTokenNumber = Integer.parseInt(tokenNum);
+
+                String expTokens = Utils.get(currentQSlotItem, "m_expected_tokens");
+                if (expTokens.compareTo("N.A") == 0)
+                {
+                    expTokens = "0";
+                }
+                qSlot.mExpectedTokens = Integer.parseInt(expTokens);
 
 
             } catch (JSONException e)

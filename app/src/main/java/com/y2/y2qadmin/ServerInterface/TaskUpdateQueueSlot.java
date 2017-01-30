@@ -6,9 +6,12 @@ import com.android.volley.RequestQueue;
 import com.y2.y2qadmin.misc.VolleySingleton;
 import com.y2.y2qadmin.model.QueueSlot;
 import com.y2.y2qadmin.model.QueueSlotResultParser;
+import com.y2.y2qadmin.model.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Date;
 
 /**
  * Created by u on 10.06.2015.
@@ -36,13 +39,15 @@ public class TaskUpdateQueueSlot extends AsyncTask<Void, Void, QueueSlot>
     private String mQueueSlotId;
     int mTokenNumber;
     UpdateStatus mUpdateStatus;
+    Date mActivityTime;
 
-    public TaskUpdateQueueSlot(QueueSlotsUpdateListener aListener_in, String qSlotId, UpdateStatus updateStatus, int tokenNumber)
+    public TaskUpdateQueueSlot(QueueSlotsUpdateListener aListener_in, String qSlotId, UpdateStatus updateStatus, int tokenNumber, Date activityTime)
     {
         mQueueSlotId = qSlotId;
         mTokenNumber = tokenNumber;
         mUpdateStatus = updateStatus;
         this.myListener = aListener_in;
+        mActivityTime = activityTime;
         volleySingleton = VolleySingleton.getInstance(null);
         requestQueue = volleySingleton.getRequestQueue();
 
@@ -65,7 +70,7 @@ public class TaskUpdateQueueSlot extends AsyncTask<Void, Void, QueueSlot>
         if(mUpdateStatus == UpdateStatus.Set)
             status = "SET";
 
-        JSONObject response = Requestor.request(requestQueue, Endpoints.getRequestUrlUpdateQueueSlot(mQueueSlotId, status, mTokenNumber));
+        JSONObject response = Requestor.request(requestQueue, Endpoints.getRequestUrlUpdateQueueSlot(mQueueSlotId, status, mTokenNumber, Utils.printDate(mActivityTime)));
 
         QueueSlot slot = null;
         try
