@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -40,38 +39,44 @@
     <LinearLayout android:id="@+id/queue_slot_holder"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-
                   android:background="@color/card_background"
                   android:orientation="vertical"
                   android:paddingBottom="@dimen/activity_vertical_margin"
-
                   android:paddingLeft="@dimen/activity_horizontal_margin"
                   android:paddingRight="@dimen/activity_horizontal_margin"
-                  android:paddingTop="@dimen/activity_vertical_margin">
+                  android:paddingTop="@dimen/activity_vertical_margin"
+                  >
 
         <LinearLayout android:id="@+id/header_section"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_gravity="center_horizontal"
+                      android:layout_margin="5dp"
                       android:background="@drawable/linear_layout_border"
                       android:gravity="center"
                       android:orientation="vertical"
-                      android:layout_margin="5dp"
         >
 
-            <TextView android:id="@+id/slot_status"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:gravity="center"
-                      android:text="Slot Status"
-                      android:textColor="@color/primary_text"
-                      android:textSize="16sp"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+                <TextView android:id="@+id/slot_status"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical|left"
+                          android:layout_weight="1"
+                          android:text="Slot Status"
+                          android:textColor="@color/primary_text"
+                          android:textSize="16sp"/>
 
-            <ImageView android:id="@+id/queue_status_icon"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center_horizontal"
-                       android:background="@drawable/queue_not_started"/>
+                <ImageView android:id="@+id/queue_status_icon"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="end"
+                           android:background="@drawable/queue_not_started"/>
+
+            </LinearLayout>
+
 
             <TextView android:id="@+id/slot_date"
                       android:layout_width="match_parent"
@@ -138,7 +143,7 @@
             </LinearLayout>
 
             <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
+                          android:layout_height="match_parent"
                           android:layout_below="@+id/first_bar"
                           android:gravity="center"
                           android:orientation="horizontal">
@@ -166,7 +171,7 @@
                 <pl.polak.clicknumberpicker.ClickNumberPickerView
                     android:id="@+id/token_number_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     app:decimal_number="0"

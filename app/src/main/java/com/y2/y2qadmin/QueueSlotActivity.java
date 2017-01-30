@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -148,7 +149,9 @@ public class QueueSlotActivity extends AppCompatActivity implements TaskUpdateQu
     private void updateUI()
     {
         TextView v = (TextView)findViewById(R.id.queue_name);
+        v.setFilters( new InputFilter[] { new InputFilter.LengthFilter(30) } );
         v.setText(mQueue.mQName);
+
 
         v = (TextView)findViewById(R.id.queue_address);
         v.setText(mQueue.mAddress);
